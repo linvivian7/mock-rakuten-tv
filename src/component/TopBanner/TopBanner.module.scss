@@ -1,0 +1,26 @@
+@import '../../styles/vars';
+
+.nav {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: $black;
+  padding: 0 20px;
+}
+
+.logo {
+  display: inline-block;
+}
+
+.links {
+  display: inline-flex;
+  padding: 0;
+}
+
+.link {
+  color: $white;
+  padding-left: 20px;
+  text-align: left;
+  text-decoration: none;
+}

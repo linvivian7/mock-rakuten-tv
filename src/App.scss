@@ -1,0 +1,29 @@
+@import './styles/normalize';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+$font-family: 'Noto Sans', 'Helvetica', arial, sans-serif;
+
+* {
+  box-sizing: border-box;
+  font-family: $font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+*:focus {
+  outline: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+fieldset {
+  padding: 0;
+}
