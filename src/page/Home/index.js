@@ -1,16 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-// TOFIX: use api for list json
+// components
 import TopBanner from '../../component/TopBanner';
-import Genre from '../../component/Genre';
+import List from '../../component/List';
+
+// data
+import movieLists from '../../../static/data/lists.json';
+
+import styles from './Home.module';
 
 const Home = () => {
   return (
-    <>
+    <div className={styles.body}>
       <TopBanner />
-      <Genre />
-    </>
+      <div>
+        {movieLists.map((movieList) => (
+          <List key={movieList.id} movieList={movieList} />
+        ))}
+      </div>
+    </div>
   );
 };
 

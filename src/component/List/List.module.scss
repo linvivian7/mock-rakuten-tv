@@ -1,0 +1,41 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+$margin-left: 15px;
+
+%arrow {
+  position: absolute;
+  margin-top: 10vw;
+  width: 7vw;
+  max-width: 76px;
+}
+
+.title {
+  margin-left: $margin-left;
+  color: $white;
+  font-weight: 400;
+}
+
+.movies {
+  display: flex;
+  margin-left: $margin-left;
+  overflow: hidden;
+
+  div {
+    flex: 1;
+
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
+  }
+}
+
+.arrowLeft {
+  @extend %arrow;
+  left: 0;
+}
+
+.arrowRight {
+  @extend %arrow;
+  right: 0;
+}

@@ -19,8 +19,14 @@ $font-family: 'Noto Sans', 'Helvetica', arial, sans-serif;
 *:focus {
   outline: 0;
 }
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
 ul {
+  padding: 0;
   list-style: none;
 }
 
