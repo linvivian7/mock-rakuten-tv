@@ -16,9 +16,8 @@ const Movie = ({ info, history }) => {
   return (
     <div
       className={styles.movie}
-      onClick={() => history.push(`movies/${info.id}`)}
+      onClick={() => history.push(`${info.type}/${info.id}`)}
     >
-      {/* <Link to={`/movies/${info.id}`}> */}
       <div
         styles={{ width: '180px', backgroundColor: 'white', height: '206px' }}
       >
@@ -34,7 +33,6 @@ const Movie = ({ info, history }) => {
           <span className={styles.rating}>{info.highlightedScore.score}</span>
         </div>
       </div>
-      {/* </Link> */}
     </div>
   );
 };

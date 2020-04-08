@@ -34,7 +34,27 @@ const helper = ({ results, fileName }) => {
   writeFile(fileName, raw);
 };
 
-const formatResult = (id, result) => ({ key: id, value: result.data.data });
+const formatResult = ({ data: { data } }) => {
+  const { id, images } = data;
+  const snapshot = `${getImageKitUrl(images.snapshot)}`;
+  const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
+
+  return {
+    key: id,
+    value: camelCaseKeys(
+      {
+        ...data,
+        countries: data.countries.map((country) => country.name),
+        images: {
+          ribbons: images.ribbons,
+          snapshot,
+          snapshotBlur: snapshotLQ,
+        },
+      },
+      { deep: true }
+    ),
+  };
+};
 
 const defaultNormalize = ({ data: { lists, genres } }) => {
   const movieLists = lists.map(({ id, name, contents }) => ({
@@ -44,17 +64,14 @@ const defaultNormalize = ({ data: { lists, genres } }) => {
       const { id, images, type } = movie;
       const cover = `${getImageKitUrl(images.artwork)}?tr=w-224,h-auto`;
       const coverLQ = `${cover},bl-30,q-50`;
-      const snapshot = `${getImageKitUrl(images.snapshot)}`;
-      const snapshotLQ = `${getImageKitUrl(images.snapshot)}?tr=bl-30,q-50`;
+
       const info = camelCaseKeys(
         {
           ...movie,
           images: {
-            ...movie.images,
+            ribbons: images.ribbons,
             cover,
             coverBlur: coverLQ,
-            snapshot,
-            snapshotBlur: snapshotLQ,
           },
         },
         { deep: true }
@@ -93,7 +110,7 @@ axios
       movieIds.map((id) =>
         axios
           .get(`${PREFIX}/movies/${id}${SUFFIX}`)
-          .then((result) => formatResult(id, result))
+          .then((result) => formatResult(result))
       )
     ).then((results) => helper({ results, fileName: 'movies' }));
 
@@ -101,7 +118,7 @@ axios
       tvIds.map((id) =>
         axios
           .get(`${PREFIX}/tv_shows/${id}${SUFFIX}`)
-          .then((result) => formatResult(id, result))
+          .then((result) => formatResult(result))
       )
     ).then((results) => helper({ results, fileName: 'shows' }));
 
