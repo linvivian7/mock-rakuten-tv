@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "data-dump": "node scripts/data-dump.js",
+    "start": "yarn run data-dump && webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "keywords": [],
   "author": "linvivian7",
@@ -26,6 +27,8 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "camelcase-keys": "^6.2.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2"
