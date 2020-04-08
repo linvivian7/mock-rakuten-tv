@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'development';
@@ -63,11 +65,15 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.scss'],
   },
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
+    path: path.resolve(__dirname, '/dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: './dist/index.html',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: isDevelopment ? '[name].css' : '[name].[hash].css',
@@ -75,6 +81,7 @@ module.exports = {
     }),
   ],
   devServer: {
+    historyApiFallback: true,
     contentBase: './dist',
     hot: true,
   },

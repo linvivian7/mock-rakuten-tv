@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "data-dump": "node scripts/data-dump.js",
-    "start": "yarn run data-dump && webpack-dev-server --config ./webpack.config.js --mode development"
+    "start": "webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "keywords": [],
   "author": "linvivian7",
@@ -16,6 +16,7 @@
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.5.1",
+    "html-webpack-plugin": "^4.0.4",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "react-hot-loader": "^4.12.19",
@@ -29,6 +30,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "camelcase-keys": "^6.2.2",
+    "history": "^4.10.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2"

@@ -1,11 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import star from '../../../images/star.svg';
 import user from '../../../images/user.svg';
 
 import styles from './Movie.module';
 
-const Movie = ({ info }) => {
+const Movie = ({ info, history }) => {
   const [src, setSrc] = useState(info.images.coverBlur);
   useEffect(() => {
     setTimeout(() => {
@@ -14,7 +14,11 @@ const Movie = ({ info }) => {
   }, []);
 
   return (
-    <div className={styles.movie}>
+    <div
+      className={styles.movie}
+      onClick={() => history.push(`movies/${info.id}`)}
+    >
+      {/* <Link to={`/movies/${info.id}`}> */}
       <div
         styles={{ width: '180px', backgroundColor: 'white', height: '206px' }}
       >
@@ -30,8 +34,9 @@ const Movie = ({ info }) => {
           <span className={styles.rating}>{info.highlightedScore.score}</span>
         </div>
       </div>
+      {/* </Link> */}
     </div>
   );
 };
 
-export default Movie;
+export default withRouter(Movie);

@@ -1,26 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-// pages
+import { Router, Switch, Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import Home from './page/Home';
+import Movie from './page/Movie';
 
 import './App.scss';
 
+const history = createBrowserHistory();
+
 const App = () => (
-  <Router>
+  <Router history={history}>
     <div>
-      {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
       <Switch>
-        {/* <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/users">
-          <Users />
-        </Route> */}
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route path="/movies/:id" component={Movie} />
+        <Route path="/" component={Home} />
+        <Route path="*" component={Home} />
       </Switch>
     </div>
   </Router>
