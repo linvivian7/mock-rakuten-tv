@@ -15,7 +15,8 @@
 
 .photo {
   max-width: 86px;
-  background-size: contain;
+  min-height: 130px;
+  object-fit: cover;
 }
 
 .name {

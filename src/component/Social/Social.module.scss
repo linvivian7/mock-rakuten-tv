@@ -1,0 +1,25 @@
+@import '../../styles/vars';
+
+.social {
+  flex: 2;
+  padding: 24px;
+}
+
+.dummy {
+  display: flex;
+  margin-bottom: 8px;
+
+  .circle {
+    padding: 8px 10px;
+    border-radius: 50%;
+    border: $border;
+    background-color: $white;
+  }
+
+  .text {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    font-size: 14px;
+  }
+}
