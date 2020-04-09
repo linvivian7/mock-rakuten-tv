@@ -2,10 +2,10 @@ import React from 'react';
 
 // components
 import TopBanner from '../../component/TopBanner';
-import List from '../../component/List';
+import ContentList from '../../component/ContentList';
 
 // data
-import movieLists from '../../../static/data/lists.json';
+import contentLists from '../../../static/data/lists.json';
 
 import styles from './Home.module';
 
@@ -14,8 +14,8 @@ const Home = () => {
     <div className={styles.body}>
       <TopBanner />
       <div>
-        {movieLists.map((movieList) => (
-          <List key={movieList.id} movieList={movieList} />
+        {contentLists.map((contentList) => (
+          <ContentList key={contentList.id} contentList={contentList} />
         ))}
       </div>
     </div>

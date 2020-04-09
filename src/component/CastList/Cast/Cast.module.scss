@@ -1,0 +1,28 @@
+@import '../../../styles/vars';
+
+%text {
+  margin: 4px 0;
+  text-align: center;
+  font-size: 13px;
+  max-width: 86px;
+}
+
+.cast {
+  + .cast {
+    margin-left: 8px;
+  }
+}
+
+.photo {
+  max-width: 86px;
+  background-size: contain;
+}
+
+.name {
+  @extend %text;
+}
+
+.director {
+  @extend %text;
+  font-style: italic;
+}

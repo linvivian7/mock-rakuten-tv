@@ -1,0 +1,24 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+%arrow {
+  position: absolute;
+  margin-top: 50px;
+  width: 36px;
+  max-width: 76px;
+}
+
+.cast {
+  display: flex;
+  overflow: hidden;
+}
+
+.arrowLeft {
+  @extend %arrow;
+  left: 0;
+}
+
+.arrowRight {
+  @extend %arrow;
+  right: 0;
+}

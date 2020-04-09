@@ -34,14 +34,14 @@ const helper = ({ results, fileName }) => {
   writeFile(fileName, raw);
 };
 
-const formatResult = ({ data: { data } }) => {
-  const { id, images, countries, view_options: viewOptions } = data;
+const formatMovieResult = (id, { data: { data } }) => {
+  const { images, countries, directors, actors } = data;
   const snapshot = `${getImageKitUrl(images.snapshot)}`;
   const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
   const offlineStream =
-    viewOptions &&
-    viewOptions.private &&
-    viewOptions.private['offline_streams'];
+    data.view_options &&
+    data.view_options.private &&
+    data.view_options.private['offline_streams'];
 
   return {
     key: id,
@@ -64,6 +64,66 @@ const formatResult = ({ data: { data } }) => {
               .map(({ name }) => name)
               .join(', '),
         },
+        cast: [
+          ...directors.map(({ name, photo }) => ({
+            name,
+            photo: getImageKitUrl(photo),
+            isDirector: true,
+          })),
+          ...actors.map(({ name, photo }) => ({
+            name,
+            photo: getImageKitUrl(photo),
+            isDirector: false,
+          })),
+        ],
+      },
+      { deep: true }
+    ),
+  };
+};
+
+const formatShowResult = (id, { data: { data } }) => {
+  const { episodes, images, directors, actors } = data;
+  const snapshot = `${getImageKitUrl(images.snapshot)}`;
+  const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
+  const offlineStream =
+    episodes[0] &&
+    episodes[0].view_options &&
+    episodes[0].view_options.private &&
+    episodes[0].view_options.private['offline_streams'];
+
+  return {
+    key: id,
+    value: camelCaseKeys(
+      {
+        ...data,
+        images: {
+          ribbons: images.ribbons,
+          snapshot,
+          snapshotBlur: snapshotLQ,
+        },
+        languages: {
+          audio:
+            offlineStream &&
+            offlineStream[0]['audio_languages'].map(({ name }) => name),
+          subtitles:
+            offlineStream &&
+            offlineStream[0]['subtitle_languages']
+              .map(({ name }) => name)
+              .join(', '),
+        },
+        cast: [
+          ...directors.map(({ name, photo }) => ({
+            name,
+            photo: getImageKitUrl(photo),
+            isDirector: true,
+          })),
+          ...actors.map(({ name, photo }) => ({
+            name,
+            photo: getImageKitUrl(photo),
+            isDirector: false,
+          })),
+        ],
       },
       { deep: true }
     ),
@@ -71,17 +131,17 @@ const formatResult = ({ data: { data } }) => {
 };
 
 const defaultNormalize = ({ data: { lists, genres } }) => {
-  const movieLists = lists.map(({ id, name, contents }) => ({
+  const contentLists = lists.map(({ id, name, contents }) => ({
     id,
     name,
-    movies: contents.data.map((movie) => {
-      const { id, images, type } = movie;
+    content: contents.data.map((content) => {
+      const { id, images, type } = content;
       const cover = `${getImageKitUrl(images.artwork)}?tr=w-224,h-auto`;
       const coverLQ = `${cover},bl-30,q-50`;
 
       const info = camelCaseKeys(
         {
-          ...movie,
+          ...content,
           images: {
             ribbons: images.ribbons,
             cover,
@@ -104,7 +164,7 @@ const defaultNormalize = ({ data: { lists, genres } }) => {
   const movieGenres = genres.data.map((genre) => camelCaseKeys(genre));
 
   return {
-    movieLists,
+    contentLists,
     movieGenres,
   };
 };
@@ -124,18 +184,18 @@ axios
       movieIds.map((id) =>
         axios
           .get(`${PREFIX}/movies/${id}${SUFFIX}`)
-          .then((result) => formatResult(result))
+          .then((result) => formatMovieResult(id, result))
       )
     ).then((results) => helper({ results, fileName: 'movies' }));
 
     Promise.all(
       tvIds.map((id) =>
         axios
-          .get(`${PREFIX}/tv_shows/${id}${SUFFIX}`)
-          .then((result) => formatResult(result))
+          .get(`${PREFIX}/seasons/${id}-1${SUFFIX}`)
+          .then((result) => formatShowResult(id, result))
       )
     ).then((results) => helper({ results, fileName: 'shows' }));
 
-    writeFile('lists', data.movieLists);
+    writeFile('lists', data.contentLists);
     writeFile('genres', data.movieGenres);
   });

@@ -1,0 +1,31 @@
+@import '../../../styles/vars';
+
+.content {
+  :not(:first-of-type) {
+    margin-left: 5px;
+  }
+}
+
+.cover {
+  width: 22vw;
+  max-width: 224px;
+  background-size: contain;
+}
+
+.secondary {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 6px 4px 0;
+}
+
+.rating {
+  margin-left: 5px;
+  color: $yellow;
+  font-size: 13px;
+}
+
+.user {
+  margin-left: 5px;
+  color: $yellow;
+  font-size: 13px;
+}

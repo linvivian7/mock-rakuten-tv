@@ -1,0 +1,41 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+$padding-left: 15px;
+
+%arrow {
+  position: absolute;
+  margin-top: 10vw;
+  width: 7vw;
+  max-width: 76px;
+}
+
+.title {
+  padding-left: $padding-left;
+  color: $white;
+  font-weight: 400;
+}
+
+.content {
+  display: flex;
+  padding-left: $padding-left;
+  overflow: hidden;
+
+  div {
+    flex: 1;
+
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
+  }
+}
+
+.arrowLeft {
+  @extend %arrow;
+  left: 0;
+}
+
+.arrowRight {
+  @extend %arrow;
+  right: 0;
+}
