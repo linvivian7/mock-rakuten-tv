@@ -35,9 +35,13 @@ const helper = ({ results, fileName }) => {
 };
 
 const formatResult = ({ data: { data } }) => {
-  const { id, images, countries } = data;
+  const { id, images, countries, view_options: viewOptions } = data;
   const snapshot = `${getImageKitUrl(images.snapshot)}`;
   const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
+  const offlineStream =
+    viewOptions &&
+    viewOptions.private &&
+    viewOptions.private['offline_streams'];
 
   return {
     key: id,
@@ -49,6 +53,16 @@ const formatResult = ({ data: { data } }) => {
           ribbons: images.ribbons,
           snapshot,
           snapshotBlur: snapshotLQ,
+        },
+        languages: {
+          audio:
+            offlineStream &&
+            offlineStream[0]['audio_languages'].map(({ name }) => name),
+          subtitles:
+            offlineStream &&
+            offlineStream[0]['subtitle_languages']
+              .map(({ name }) => name)
+              .join(', '),
         },
       },
       { deep: true }

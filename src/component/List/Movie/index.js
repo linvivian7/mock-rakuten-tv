@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import star from '../../../images/star.svg';
+import star from '../../../images/star-yellow.svg';
 import user from '../../../images/user.svg';
 
 import styles from './Movie.module';
 
 const Movie = ({ info, history }) => {
   const [src, setSrc] = useState(info.images.coverBlur);
+
   useEffect(() => {
     setTimeout(() => {
       setSrc(info.images.cover);
-    }, 800);
+    }, 200);
   }, []);
 
   return (
@@ -29,8 +30,10 @@ const Movie = ({ info, history }) => {
           <span className={styles.rating}>{info.highlightedScore.score}</span>
         </div>
         <div>
-          <img src={user} width="12" alt="rating" loading="lazy" />
-          <span className={styles.rating}>{info.highlightedScore.score}</span>
+          <img src={user} width="12" alt="user" loading="lazy" />
+          <span className={styles.rating}>
+            {info.highlightedScore.formattedAmountOfVotes}
+          </span>
         </div>
       </div>
     </div>
