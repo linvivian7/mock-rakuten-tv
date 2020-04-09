@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -79,10 +78,6 @@ module.exports = {
     publicPath: isDevelopment ? '/' : '/dist',
   },
   plugins: [
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      deleteOriginalAssets: !isDevelopment,
-    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: './src/index.html',
