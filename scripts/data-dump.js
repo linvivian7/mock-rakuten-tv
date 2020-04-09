@@ -35,7 +35,7 @@ const helper = ({ results, fileName }) => {
 };
 
 const formatResult = ({ data: { data } }) => {
-  const { id, images } = data;
+  const { id, images, countries } = data;
   const snapshot = `${getImageKitUrl(images.snapshot)}`;
   const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
 
@@ -44,7 +44,7 @@ const formatResult = ({ data: { data } }) => {
     value: camelCaseKeys(
       {
         ...data,
-        countries: data.countries.map((country) => country.name),
+        countries: countries.map((country) => country.name),
         images: {
           ribbons: images.ribbons,
           snapshot,
