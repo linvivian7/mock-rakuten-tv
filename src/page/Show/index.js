@@ -6,18 +6,11 @@ import TopBanner from '../../component/TopBanner';
 import CastList from '../../component/CastList';
 
 // icons
-import calendar from '../../images/calendar.svg';
-import duration from '../../images/duration.svg';
+
 import facebook from '../../images/facebook.svg';
-import flag from '../../images/flag.svg';
-import info from '../../images/info.svg';
-import movieClapper from '../../images/movie-clapper.svg';
-import parental from '../../images/parental.svg';
 import pinterest from '../../images/pinterest.svg';
 import speechBubble from '../../images/speech-bubble.svg';
-import starBlack from '../../images/star-black.svg';
 import twitter from '../../images/twitter.svg';
-import user from '../../images/user.svg';
 import view from '../../images/view.svg';
 
 // data
@@ -104,7 +97,7 @@ const Show = ({ match }) => {
         <img className={styles.snapshot} src={src} alt="snapshot" />
         {/* info */}
         <div className={styles.info}>
-          <div className={styles.general}>
+          {/* <div className={styles.general}>
             <div className={styles.iconInfos}>
               <IconInfo
                 icon={parental}
@@ -147,7 +140,7 @@ const Show = ({ match }) => {
               </h5>
               <CastList castList={show.cast} />
             </section>
-          </div>
+          </div> */}
           <aside className={styles.social}>
             {['seen', 'twitter', 'facebook', 'pinterest'].map((social) => (
               <div key={social} className={styles.dummy}>

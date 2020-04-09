@@ -2,8 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
-const isDevelopment = process.env.NODE_ENV !== 'development';
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
   entry: './src/index.js',
@@ -73,24 +74,29 @@ module.exports = {
     extensions: ['*', '.js', '.jsx', '.scss'],
   },
   output: {
-    path: path.resolve(__dirname, '/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: isDevelopment ? '/' : '/dist',
   },
   plugins: [
+    new CompressionPlugin({
+      algorithm: 'gzip',
+      deleteOriginalAssets: !isDevelopment,
+    }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: './dist/index.html',
+      template: './src/index.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: isDevelopment ? '[name].css' : '[name].[hash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
     }),
+    new webpack.optimize.SplitChunksPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
-    contentBase: './dist',
+    contentBase: '/',
     hot: true,
   },
 };

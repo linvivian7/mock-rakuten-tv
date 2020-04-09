@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "data-dump": "node scripts/data-dump.js",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "build": "rm -rf ./dist && NODE_ENV=production webpack --mode=production --config ./webpack.config.js",
+    "dev": "NODE_ENV=development webpack-dev-server --config ./webpack.config.js --mode development",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
   "author": "linvivian7",
@@ -15,6 +18,7 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
+    "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.5.1",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.4",
@@ -31,9 +35,13 @@
   "dependencies": {
     "axios": "^0.19.2",
     "camelcase-keys": "^6.2.2",
+    "express": "^4.17.1",
     "history": "^4.10.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2"
+  },
+  "engines": {
+    "yarn": "1.x"
   }
 }
