@@ -1,12 +1,24 @@
+@import '../../styles/mixins';
 @import '../../styles/vars';
 
 .social {
-  flex: 2;
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
   padding: 24px;
+
+  @include for-size(phone-up) {
+    width: 100%;
+  }
+
+  @include for-size(desktop-up) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }
 
 .dummy {
-  display: flex;
+  display: inline-flex;
   margin-bottom: 8px;
 
   .circle {
@@ -17,9 +29,13 @@
   }
 
   .text {
-    display: flex;
+    display: none;
     align-items: center;
     margin-left: 12px;
     font-size: 14px;
+
+    @include for-size(phone-up) {
+      display: flex;
+    }
   }
 }

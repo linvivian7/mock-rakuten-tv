@@ -21,11 +21,14 @@
 }
 
 .general {
-  flex: 3;
-  max-width: 100%;
+  width: calc(70% - 24px);
   background-color: $white;
   padding: 24px;
   border: $border;
+
+  @include for-size(phone-up) {
+    width: 100%;
+  }
 }
 
 .plot {

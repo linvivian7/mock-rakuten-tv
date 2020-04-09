@@ -35,19 +35,12 @@ const Content = ({ match }) => {
     hasContent && (
       <div className={styles.body}>
         <TopBanner />
-        <div
-          style={{
-            width: '100%',
-            height: '0',
-            paddingTop: '50%',
-            position: 'relative',
-          }}
-        >
+        <div className={styles.snapshotWrapper}>
           <img className={styles.snapshot} src={src} alt="snapshot" />
         </div>
         <div className={styles.info}>
-          <General content={content} />
           <Social />
+          <General content={content} />
         </div>
       </div>
     )
