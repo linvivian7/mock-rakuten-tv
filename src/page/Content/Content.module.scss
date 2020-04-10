@@ -8,9 +8,28 @@
 
 .snapshot-wrapper {
   width: 100%;
-  height: 0;
-  padding-top: 50%;
+  // height: 0;
+  padding-top: 100%;
+  margin-top: -$header-height;
   position: relative;
+  background-color: #000;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 215%;
+  transition: height 0.1s linear, background-image 0.2s ease;
+  transition-property: height, background-image;
+  transition-duration: 0.1s, 0.2s;
+  transition-timing-function: linear, ease;
+  transition-delay: 0s, 0s;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: background-position;
+  z-index: 1;
+
+  @include for-size(phone-up) {
+    padding-top: 50%;
+    background-size: 100%;
+  }
 }
 
 .snapshot {

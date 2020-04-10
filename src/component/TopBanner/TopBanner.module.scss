@@ -1,12 +1,28 @@
+@import '../../styles/mixins';
 @import '../../styles/vars';
 
 .nav {
-  height: 60px;
+  width: 100%;
+  height: $header-height;
   display: flex;
+  position: relative;
   flex-direction: row;
   align-items: center;
+  padding: 0 12px;
+  z-index: 200;
   background-color: $black;
-  padding: 0 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8) 0,
+    rgba(0, 0, 0, 0.7) 20%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+  z-index: 200;
+
+  @include for-size(phone-up) {
+    background: $black;
+  }
 }
 
 .logo {
@@ -14,8 +30,12 @@
 }
 
 .links {
-  display: inline-flex;
+  display: none;
   padding: 0;
+
+  @include for-size(phone-up) {
+    display: inline-flex;
+  }
 }
 
 .link {

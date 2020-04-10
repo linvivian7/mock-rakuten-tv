@@ -35,8 +35,11 @@ const Content = ({ match }) => {
     hasContent && (
       <div className={styles.body}>
         <TopBanner />
-        <div className={styles.snapshotWrapper}>
-          <img className={styles.snapshot} src={src} alt="snapshot" />
+        <div
+          className={styles.snapshotWrapper}
+          style={{ backgroundImage: `url(${src})` }}
+        >
+          {/* <img className={styles.snapshot} src={src} alt="snapshot" /> */}
         </div>
         <div className={styles.info}>
           <Social />
