@@ -11,7 +11,7 @@ const Content = ({ info, history }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setSrc(info.images.cover);
-    }, 200);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
@@ -20,14 +20,19 @@ const Content = ({ info, history }) => {
 
   return (
     <div
-      className={styles.movie}
+      className={styles.content}
       onClick={() => history.push(`${info.type}/${info.id}`)}
     >
       <div
-        styles={{ width: '180px', backgroundColor: 'white', height: '206px' }}
-      >
-        <img className={styles.cover} src={src} alt="cover" />
-      </div>
+        className={
+          info.type === 'movies'
+            ? styles.coverWrapperMovie
+            : styles.coverWrapperShow
+        }
+        style={{
+          backgroundImage: `url(${src})`,
+        }}
+      />
       <div className={styles.secondary}>
         <div>
           <img src={star} width="12" alt="rating" loading="lazy" />

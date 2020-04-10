@@ -1,9 +1,30 @@
 @import '../../../styles/vars';
 
+%cover-wrapper {
+  height: auto;
+  position: relative;
+  background-color: #000;
+  width: 22vw;
+  min-width: 122px;
+  max-width: 224px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .content {
   :not(:first-of-type) {
     margin-left: 5px;
   }
+}
+
+.cover-wrapper-movie {
+  @extend %cover-wrapper;
+  padding-top: 140%;
+}
+
+.cover-wrapper-show {
+  @extend %cover-wrapper;
+  padding-top: 75%;
 }
 
 .cover {
