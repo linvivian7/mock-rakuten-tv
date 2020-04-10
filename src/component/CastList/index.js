@@ -47,22 +47,22 @@ const CastList = ({ castList }) => {
           />
         ))}
         {!isAtBeg > 0 && (
-          <img
-            className={styles.arrowLeft}
-            src={arrowLeft}
-            alt="arrow"
-            loading="lazy"
-            onClick={onClickLeft}
-          />
+          <div onClick={onClickLeft}>
+            <img
+              className={styles.arrowLeft}
+              src={arrowLeft}
+              alt="arrow"
+              loading="lazy"
+            />
+          </div>
         )}
         {!isAtEnd && (
-          <div className="wrapper">
+          <div onClick={onClickRight}>
             <img
               className={styles.arrowRight}
               src={arrowRight}
               alt="arrow"
               loading="lazy"
-              onClick={onClickRight}
             />
           </div>
         )}

@@ -34,12 +34,12 @@ $padding-left: 15px;
   }
 }
 
-.arrowLeft {
+.arrow-left {
   @extend %arrow;
   left: 0;
 }
 
-.arrowRight {
+.arrow-right {
   @extend %arrow;
   right: 0;
 }

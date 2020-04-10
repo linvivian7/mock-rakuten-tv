@@ -42,22 +42,22 @@ const ContentList = ({ contentList }) => {
           <Content key={content.id} info={content} />
         ))}
         {!isAtBeg > 0 && (
-          <img
-            className={styles.arrowLeft}
-            src={arrowLeft}
-            alt="arrow"
-            loading="lazy"
-            onClick={onClickLeft}
-          />
+          <div className={styles.arrowLeft} onClick={onClickLeft}>
+            <img
+              className={styles.arrowLeft}
+              src={arrowLeft}
+              alt="arrow"
+              loading="lazy"
+            />
+          </div>
         )}
         {!isAtEnd && (
-          <div className="wrapper">
+          <div className={styles.arrowRight} onClick={onClickRight}>
             <img
               className={styles.arrowRight}
               src={arrowRight}
               alt="arrow"
               loading="lazy"
-              onClick={onClickRight}
             />
           </div>
         )}

@@ -18,8 +18,10 @@ const Content = ({ match }) => {
   const hasContent = !!content;
   const [src, setSrc] = useState(hasContent && content.images.snapshotBlur);
 
-  if (hasContent) {
-    useEffect(() => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    if (hasContent) {
       const timer = setTimeout(() => {
         setSrc(content.images.snapshot);
       }, 200);
@@ -27,8 +29,8 @@ const Content = ({ match }) => {
       return () => {
         clearTimeout(timer);
       };
-    }, []);
-  }
+    }
+  }, []);
 
   return (
     hasContent && (

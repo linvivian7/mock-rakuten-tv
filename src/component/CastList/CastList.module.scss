@@ -3,9 +3,13 @@
 
 %arrow {
   position: absolute;
-  margin-top: 50px;
-  width: 36px;
+  width: 7vw;
+  height: 130px;
   max-width: 76px;
+  min-width: 40px;
+  margin: auto;
+  top: 0;
+  bottom: 0;
 }
 
 .cast {
@@ -13,12 +17,20 @@
   overflow: hidden;
 }
 
-.arrowLeft {
+div {
+  > .arrow-left,
+  .arrow-right {
+    height: 130px;
+    margin: 0;
+  }
+}
+
+.arrow-left {
   @extend %arrow;
   left: 0;
 }
 
-.arrowRight {
+.arrow-right {
   @extend %arrow;
   right: 0;
 }
