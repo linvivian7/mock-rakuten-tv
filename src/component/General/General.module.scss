@@ -18,6 +18,10 @@
 .ribbon {
   padding: 0 4px;
   font-size: 13px;
+
+  + .ribbon {
+    margin-left: 8px;
+  }
 }
 
 .general {

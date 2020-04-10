@@ -89,7 +89,10 @@ const General = ({ content }) => (
       content.images.ribbons.map(({ id, color, textColor, localizedName }) => (
         <span
           key={id}
-          style={{ color: textColor, backgroundColor: color }}
+          style={{
+            color: textColor ? textColor : 'white',
+            backgroundColor: color,
+          }}
           className={styles.ribbon}
         >
           {localizedName}
