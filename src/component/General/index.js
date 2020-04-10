@@ -82,13 +82,7 @@ const General = ({ content }) => (
       <IconInfo
         icon={info}
         alt="info"
-        text={`Original title: ${
-          content.type === 'tv_shows'
-            ? content.episodes &&
-              content.episodes[0] &&
-              content.episodes[0].tvinfoTitle
-            : content.originalTitle
-        }`}
+        text={`Original title: ${content.originalTitle}`}
       />
     </div>
     {content.images.ribbons.length > 0 &&

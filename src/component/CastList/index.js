@@ -39,7 +39,12 @@ const CastList = ({ castList }) => {
       <h3 className={styles.title}>{castList.name}</h3>
       <div className={styles.cast} ref={cast}>
         {castList.map(({ isDirector, name, photo }) => (
-          <Cast key={name} name={name} isDirector={isDirector} photo={photo} />
+          <Cast
+            key={`${name}${isDirector && '-director'}`}
+            name={name}
+            isDirector={isDirector}
+            photo={photo}
+          />
         ))}
         {!isAtBeg > 0 && (
           <img

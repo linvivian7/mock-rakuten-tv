@@ -17,7 +17,6 @@ const Content = ({ match }) => {
   let content = movies[id] || shows[id];
   const hasContent = !!content;
   const [src, setSrc] = useState(hasContent && content.images.snapshotBlur);
-  console.log('content', content);
 
   if (hasContent) {
     useEffect(() => {
@@ -38,9 +37,7 @@ const Content = ({ match }) => {
         <div
           className={styles.snapshotWrapper}
           style={{ backgroundImage: `url(${src})` }}
-        >
-          {/* <img className={styles.snapshot} src={src} alt="snapshot" /> */}
-        </div>
+        />
         <div className={styles.info}>
           <Social />
           <General content={content} />

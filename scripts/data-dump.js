@@ -35,7 +35,17 @@ const helper = ({ results, fileName }) => {
 };
 
 const formatMovieResult = (id, { data: { data } }) => {
-  const { images, countries, directors, actors } = data;
+  const {
+    actors,
+    classification,
+    countries,
+    directors,
+    duration,
+    images,
+    original_title: originalTitle,
+    plot,
+    year,
+  } = data;
   const snapshot = `${getImageKitUrl(images.snapshot)}`;
   const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
   const offlineStream =
@@ -47,7 +57,11 @@ const formatMovieResult = (id, { data: { data } }) => {
     key: id,
     value: camelCaseKeys(
       {
-        ...data,
+        year,
+        plot,
+        duration,
+        originalTitle,
+        classification,
         countries: countries.map((country) => country.name),
         images: {
           ribbons: images.ribbons,
@@ -83,7 +97,16 @@ const formatMovieResult = (id, { data: { data } }) => {
 };
 
 const formatShowResult = (id, { data: { data } }) => {
-  const { episodes, images, directors, actors } = data;
+  const {
+    actors,
+    classification,
+    episodes,
+    directors,
+    duration,
+    images,
+    plot,
+    year,
+  } = data;
   const snapshot = `${getImageKitUrl(images.snapshot)}`;
   const snapshotLQ = `${snapshot}?tr=bl-30,q-50`;
   const offlineStream =
@@ -96,7 +119,11 @@ const formatShowResult = (id, { data: { data } }) => {
     key: id,
     value: camelCaseKeys(
       {
-        ...data,
+        year,
+        plot,
+        duration,
+        classification,
+        originalTitle: episodes[0] && episodes[0].tvShowTitle,
         images: {
           ribbons: images.ribbons,
           snapshot,
@@ -130,18 +157,27 @@ const formatShowResult = (id, { data: { data } }) => {
   };
 };
 
-const defaultNormalize = ({ data: { lists, genres } }) => {
-  const contentLists = lists.map(({ id, name, contents }) => ({
+const defaultLists = ({ data: { lists } }) =>
+  lists.map(({ id, name, contents }) => ({
     id,
     name,
     content: contents.data.map((content) => {
-      const { id, images, type } = content;
+      const {
+        id,
+        images,
+        type,
+        highlighted_score: highlightedScore,
+        title,
+      } = content;
       const cover = `${getImageKitUrl(images.artwork)}?tr=w-224,h-auto`;
       const coverLQ = `${cover},bl-30,q-50`;
 
       const info = camelCaseKeys(
         {
-          ...content,
+          id,
+          type,
+          highlightedScore,
+          title,
           images: {
             ribbons: images.ribbons,
             cover,
@@ -161,18 +197,10 @@ const defaultNormalize = ({ data: { lists, genres } }) => {
     }),
   }));
 
-  const movieGenres = genres.data.map((genre) => camelCaseKeys(genre));
-
-  return {
-    contentLists,
-    movieGenres,
-  };
-};
-
 axios
   .get(TOP_URL)
-  .then((result) => defaultNormalize(result.data))
-  .then((data) => {
+  .then((result) => defaultLists(result.data))
+  .then((lists) => {
     try {
       fs.mkdirSync(FILE_DIR);
       console.log(`${FILE_DIR} folder created.`);
@@ -196,6 +224,5 @@ axios
       )
     ).then((results) => helper({ results, fileName: 'shows' }));
 
-    writeFile('lists', data.contentLists);
-    writeFile('genres', data.movieGenres);
+    writeFile('lists', lists);
   });

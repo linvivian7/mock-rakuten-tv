@@ -5,9 +5,13 @@ $padding-left: 15px;
 
 %arrow {
   position: absolute;
-  margin-top: 10vw;
   width: 7vw;
   max-width: 76px;
+  min-width: 40px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 
 .title {
