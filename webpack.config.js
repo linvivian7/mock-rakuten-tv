@@ -62,11 +62,8 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        exclude: /node_modules/,
+        loader: 'file-loader?name=images/[name].[ext]',
       },
     ],
   },
@@ -76,7 +73,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: isDevelopment ? '/' : '/dist',
+    publicPath: isDevelopment ? '/' : '/dist/',
   },
   plugins: [
     new CompressionPlugin({
