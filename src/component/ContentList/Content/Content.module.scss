@@ -42,6 +42,19 @@
   padding-top: 75%;
 }
 
+.ribbon {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 2px 4px;
+  font-size: 12px;
+  border-radius: 2px;
+
+  + .ribbon {
+    margin-left: 8px;
+  }
+}
+
 .secondary {
   display: flex;
   justify-content: space-evenly;

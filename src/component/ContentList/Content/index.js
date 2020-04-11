@@ -6,11 +6,15 @@ import user from '../../../images/user.svg';
 import styles from './Content.module';
 
 const Content = ({ info, history }) => {
-  const [src, setSrc] = useState(info.images.coverBlur);
+  const { id, images, type, highlightedScore } = info;
+  const [src, setSrc] = useState(images.coverBlur);
+  const ribbon = images.ribbons && images.ribbons[0];
+
+  console.log(ribbon);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setSrc(info.images.cover);
+      setSrc(images.cover);
     }, 500);
 
     return () => {
@@ -19,29 +23,40 @@ const Content = ({ info, history }) => {
   }, []);
 
   const handleClick = () => {
-    history.push(`${info.type}/${info.id}`);
+    history.push(`${type}/${id}`);
   };
 
   return (
     <div className={styles.content}>
       <div
-        className={
-          info.type === 'movies' ? styles.coverMovie : styles.coverShow
-        }
+        className={type === 'movies' ? styles.coverMovie : styles.coverShow}
         style={{
           backgroundImage: `url(${src})`,
         }}
         onClick={handleClick}
-      />
+      >
+        {ribbon && (
+          <span
+            key={id}
+            style={{
+              color: ribbon.textColor ? ribbon.textColor : 'white',
+              backgroundColor: ribbon.color,
+            }}
+            className={styles.ribbon}
+          >
+            {ribbon.localizedName}
+          </span>
+        )}
+      </div>
       <div className={styles.secondary}>
         <div>
           <img src={star} width="12" alt="rating" loading="lazy" />
-          <span className={styles.rating}>{info.highlightedScore.score}</span>
+          <span className={styles.rating}>{highlightedScore.score}</span>
         </div>
         <div>
           <img src={user} width="12" alt="user" loading="lazy" />
           <span className={styles.rating}>
-            {info.highlightedScore.formattedAmountOfVotes}
+            {highlightedScore.formattedAmountOfVotes}
           </span>
         </div>
       </div>
