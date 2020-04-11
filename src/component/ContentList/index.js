@@ -6,43 +6,57 @@ import arrowRight from '../../images/arrow-right.svg';
 import Content from './Content';
 import styles from './ContentList.module';
 
+const getScrollRight = (current) =>
+  current.scrollWidth - (current.scrollLeft + current.clientWidth);
+
 const ContentList = ({ contentList }) => {
-  const content = useRef();
+  const scroll = useRef();
   const [isAtBeg, setIsAtBeg] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
 
+  const shouldShowLeftArrow = !isAtBeg || isAtEnd;
+  const shouldShowRightArrow = isAtBeg || !isAtEnd;
+
   const onClickLeft = () => {
-    if (isAtEnd) {
-      setIsAtEnd(false);
+    const { offsetWidth, scrollLeft } = scroll.current;
+
+    setIsAtEnd(false);
+
+    if (scrollLeft - offsetWidth <= 0) {
+      setIsAtBeg(true);
     }
 
-    content.current.scrollLeft -= window.innerWidth;
+    scroll.current.scroll({
+      left: scrollLeft - offsetWidth,
+      behavior: 'smooth',
+    });
   };
 
   const onClickRight = () => {
-    setIsAtBeg(false);
-    const windowWidth = window.innerWidth;
-    const offsetWidth = content.current.offsetWidth;
-    const scrollLeft = content.current.scrollLeft;
-    const scrollWidth = content.current.scrollWidth;
+    const { offsetWidth, scrollLeft } = scroll.current;
+    const scrollRight = getScrollRight(scroll.current);
 
-    if (offsetWidth + scrollLeft >= scrollWidth) {
+    setIsAtBeg(false);
+
+    if (scrollRight - offsetWidth <= 0) {
       setIsAtEnd(true);
-      content.current.scrollLeft += offsetWidth;
-    } else {
-      content.current.scrollLeft += offsetWidth;
     }
+
+    scroll.current.scroll({
+      left: scrollLeft + offsetWidth,
+      behavior: 'smooth',
+    });
   };
 
   return (
     <section style={{ position: 'relative' }}>
       <h3 className={styles.title}>{contentList.name}</h3>
-      <div className={styles.contentList} ref={content}>
+      <div className={styles.contentList} ref={scroll}>
         {contentList.content.map((content) => (
           <Content key={content.id} info={content} />
         ))}
-        {!isAtBeg > 0 && (
-          <div className={styles.arrowLeft} onClick={onClickLeft}>
+        {shouldShowLeftArrow > 0 && (
+          <div className={styles.arrowWrapper} onClick={onClickLeft}>
             <img
               className={styles.arrowLeft}
               src={arrowLeft}
@@ -51,8 +65,8 @@ const ContentList = ({ contentList }) => {
             />
           </div>
         )}
-        {!isAtEnd && (
-          <div className={styles.arrowRight} onClick={onClickRight}>
+        {shouldShowRightArrow && (
+          <div className={styles.arrowWrapper} onClick={onClickRight}>
             <img
               className={styles.arrowRight}
               src={arrowRight}

@@ -7,10 +7,10 @@ $padding-left: 15px;
   width: 7vw;
   max-width: 76px;
   min-width: 40px;
-  margin: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 39px;
+  bottom: 24px;
+  background: rgba(0, 0, 0, 0.6);
+  height: calc(100% - 62px);
 }
 
 .title {
