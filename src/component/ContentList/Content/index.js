@@ -10,8 +10,6 @@ const Content = ({ info, history }) => {
   const [src, setSrc] = useState(images.coverBlur);
   const ribbon = images.ribbons && images.ribbons[0];
 
-  console.log(ribbon);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setSrc(images.cover);
