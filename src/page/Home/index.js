@@ -2,6 +2,7 @@ import React from 'react';
 
 // components
 import TopBanner from '../../component/TopBanner';
+import Carousel from '../../component/Carousel';
 import ContentList from '../../component/ContentList';
 
 // data
@@ -13,6 +14,7 @@ const Home = () => {
   return (
     <div className={styles.body}>
       <TopBanner />
+      <Carousel />
       <div>
         {contentLists.map((contentList) => (
           <ContentList key={contentList.id} contentList={contentList} />

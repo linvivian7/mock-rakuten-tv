@@ -1,0 +1,82 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+.image {
+  width: 100%;
+  padding-top: 40%;
+  margin: auto;
+  background-size: 125%;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+:global {
+  @import '~slick-carousel/slick/slick.scss';
+
+  #carousel {
+    margin-top: -40px;
+
+    @include for-size(phone-up) {
+      margin-top: 0;
+    }
+
+    .slick-slider-fade {
+      .slick-track {
+        .slick-slide {
+          transition: opacity 1s ease 0s, visibility 1s ease 0s !important;
+        }
+      }
+    }
+
+    .slick-slide {
+      display: block;
+      width: 100%;
+
+      > div {
+        height: 100%;
+
+        > div {
+          height: 100%;
+        }
+      }
+    }
+
+    .slick-dots {
+      display: flex !important;
+      justify-content: center;
+      width: 100%;
+      height: 6px;
+      margin-top: -24px;
+      padding-left: 0;
+
+      @include for-size(phone-up) {
+        display: flex !important;
+        position: absolute;
+        bottom: 14%;
+      }
+
+      li {
+        position: relative;
+        width: 24px;
+        list-style: none;
+      }
+
+      .list-inner {
+        width: 100%;
+        height: 100%;
+      }
+
+      .button {
+        width: 6px;
+        height: 6px;
+        margin: auto;
+        background: $gray;
+        border: none;
+        border-radius: 50%;
+        color: transparent;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+  }
+}
