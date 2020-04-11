@@ -19,6 +19,7 @@ const Carousel = ({}) => {
     autoplay: true,
     autoplaySpeed: 6000,
     slidesToScroll: 1,
+    arrows: false,
     className: 'slick-slider-fade',
     appendDots: (dots) => <ul> {dots} </ul>,
     customPaging: () => (
