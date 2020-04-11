@@ -1,43 +1,32 @@
 import React, { useRef, useState } from 'react';
 
-import arrowLeft from '../../images/arrow-left.svg';
-import arrowRight from '../../images/arrow-right.svg';
+import NavigationArrow from '../NavigationArrow';
 
 import Cast from './Cast';
 import styles from './CastList.module';
 
 const CastList = ({ castList }) => {
-  const cast = useRef();
+  const scroll = useRef();
   const [isAtBeg, setIsAtBeg] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
 
-  const onClickLeft = () => {
-    if (isAtEnd) {
-      setIsAtEnd(false);
-    }
+  const shouldShowLeftArrow = !isAtBeg || isAtEnd;
+  const shouldShowRightArrow = isAtBeg || !isAtEnd;
 
-    cast.current.scrollLeft -= window.innerWidth;
-  };
-
-  const onClickRight = () => {
-    setIsAtBeg(false);
-    const windowWidth = window.innerWidth;
-    const offsetWidth = cast.current.offsetWidth;
-    const scrollLeft = cast.current.scrollLeft;
-    const scrollWidth = cast.current.scrollWidth;
-
-    if (offsetWidth + scrollLeft >= scrollWidth) {
-      setIsAtEnd(true);
-      cast.current.scrollLeft += offsetWidth;
-    } else {
-      cast.current.scrollLeft += offsetWidth;
-    }
-  };
+  const getArrow = (position) => (
+    <NavigationArrow
+      type="cast"
+      target={scroll}
+      position={position}
+      setIsAtBeg={setIsAtBeg}
+      setIsAtEnd={setIsAtEnd}
+    />
+  );
 
   return (
     <section style={{ position: 'relative' }}>
       <h3 className={styles.title}>{castList.name}</h3>
-      <div className={styles.cast} ref={cast}>
+      <div className={styles.cast} ref={scroll}>
         {castList.map(({ isDirector, name, photo }) => (
           <Cast
             key={`${name}${isDirector && '-director'}`}
@@ -46,26 +35,8 @@ const CastList = ({ castList }) => {
             photo={photo}
           />
         ))}
-        {!isAtBeg > 0 && (
-          <div onClick={onClickLeft}>
-            <img
-              className={styles.arrowLeft}
-              src={arrowLeft}
-              alt="arrow"
-              loading="lazy"
-            />
-          </div>
-        )}
-        {!isAtEnd && (
-          <div onClick={onClickRight}>
-            <img
-              className={styles.arrowRight}
-              src={arrowRight}
-              alt="arrow"
-              loading="lazy"
-            />
-          </div>
-        )}
+        {shouldShowLeftArrow && getArrow('left')}
+        {shouldShowRightArrow && getArrow('right')}
       </div>
     </section>
   );

@@ -2,17 +2,6 @@
 
 $padding-left: 15px;
 
-%arrow {
-  position: absolute;
-  width: 7vw;
-  max-width: 76px;
-  min-width: 40px;
-  top: 39px;
-  bottom: 24px;
-  background: rgba(0, 0, 0, 0.6);
-  height: calc(100% - 62px);
-}
-
 .title {
   padding-left: $padding-left;
   color: $white;
@@ -23,14 +12,4 @@ $padding-left: 15px;
   display: flex;
   padding-left: $padding-left;
   overflow: hidden;
-}
-
-.arrow-left {
-  @extend %arrow;
-  left: 0;
-}
-
-.arrow-right {
-  @extend %arrow;
-  right: 0;
 }
