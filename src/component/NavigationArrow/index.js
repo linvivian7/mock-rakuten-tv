@@ -16,6 +16,7 @@ const NavigationArrow = ({
   type = 'content',
 }) => {
   const isLeft = position === 'left';
+
   const handleClickLeft = () => {
     const { offsetWidth, scrollLeft } = target.current;
 
