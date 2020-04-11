@@ -23,16 +23,15 @@ const Content = ({ info, history }) => {
   };
 
   return (
-    <div className={styles.content} onClick={handleClick}>
+    <div className={styles.content}>
       <div
         className={
-          info.type === 'movies'
-            ? styles.coverWrapperMovie
-            : styles.coverWrapperShow
+          info.type === 'movies' ? styles.coverMovie : styles.coverShow
         }
         style={{
           backgroundImage: `url(${src})`,
         }}
+        onClick={handleClick}
       />
       <div className={styles.secondary}>
         <div>
