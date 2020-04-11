@@ -18,11 +18,12 @@ const Content = ({ info, history }) => {
     };
   }, []);
 
+  const handleClick = () => {
+    history.push(`${info.type}/${info.id}`);
+  };
+
   return (
-    <div
-      className={styles.content}
-      onClick={() => history.push(`${info.type}/${info.id}`)}
-    >
+    <div className={styles.content} onClick={handleClick}>
       <div
         className={
           info.type === 'movies'

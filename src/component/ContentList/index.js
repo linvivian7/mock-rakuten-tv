@@ -37,7 +37,7 @@ const ContentList = ({ contentList }) => {
   return (
     <section style={{ position: 'relative' }}>
       <h3 className={styles.title}>{contentList.name}</h3>
-      <div className={styles.content} ref={content}>
+      <div className={styles.contentList} ref={content}>
         {contentList.content.map((content) => (
           <Content key={content.id} info={content} />
         ))}

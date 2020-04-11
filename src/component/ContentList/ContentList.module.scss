@@ -19,18 +19,10 @@ $padding-left: 15px;
   font-weight: 400;
 }
 
-.content {
+.contentList {
   display: flex;
   padding-left: $padding-left;
   overflow: hidden;
-
-  div {
-    flex: 1;
-
-    &:not(:first-child) {
-      margin-left: 8px;
-    }
-  }
 }
 
 .arrow-left {

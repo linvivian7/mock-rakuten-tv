@@ -12,8 +12,8 @@
 }
 
 .content {
-  :not(:first-of-type) {
-    margin-left: 5px;
+  &:not(:first-child) {
+    margin-left: 12px;
   }
 }
 
@@ -38,6 +38,10 @@
   display: flex;
   justify-content: space-evenly;
   padding: 6px 4px 0;
+
+  > div {
+    text-align: center;
+  }
 }
 
 .rating {
