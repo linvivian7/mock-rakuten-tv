@@ -50,9 +50,11 @@
       padding-left: 0;
 
       @include for-size(phone-up) {
-        display: flex !important;
         position: absolute;
-        bottom: 14%;
+        bottom: 6%;
+      }
+      @include for-size(tablet-up) {
+        bottom: 10%;
       }
 
       li {
